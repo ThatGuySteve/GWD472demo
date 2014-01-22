@@ -12,25 +12,53 @@
     </script>
     <script type="text/javascript">
       function initialize() {
+		
+		//variable that declares where on the map you want it to be centered.
 		var myLatLng = new google.maps.LatLng(36.114647, -115.172813);
-        var mapOptions = {
+		var myLatLng2 = new google.maps.LatLng(36, -115);
+
+        
+		//variable for properties of map.
+		var mapOptions = {
           center: myLatLng,
           zoom: 8
         };
+		
+		//instantiate a map object using above options.
         var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
-			
+
+		//variable created for a custom marker.
 		var marker = new google.maps.Marker({
     		position: myLatLng,
     		map: map,
     		title:"Hello World!",
 			icon: "bigcity.png"
-});
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
+		});
+		
+		var marker2 = new google.maps.Marker({
+    		position: myLatLng2,
+    		map: map,
+    		title:"Aww Yiss",
+			//icon: "bigcity.png"
+		});
+		
+		//variable created for the info window and its content.
+		var infowindow = new google.maps.InfoWindow({
+      		content: "This marker is pointing to the heart of Las Vegas, Nevada."
+  		});
+		
+		//event listener that looks for a 'click' on the marker to pull up the info window.
+		google.maps.event.addListener(marker, 'click', function() {
+    		infowindow.open(map,marker);
+  		});
+}
+		
+		//event listener that launches the initialize function as soon as the page finishes loading.
+		google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
   <body>
-    <div id="map-canvas"/>
+    <div id="map-canvas"></div>
   </body>
 </html>
